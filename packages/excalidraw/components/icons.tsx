@@ -25,8 +25,9 @@ type Opts = {
 } & React.SVGProps<SVGSVGElement>;
 
 export const createIcon = (
-  d: string | React.ReactNode,
+  d: string | React.ReactNode | any,
   opts: number | Opts = 512,
+  nonSVG?: boolean
 ) => {
   const {
     width = 512,
@@ -35,7 +36,7 @@ export const createIcon = (
     style,
     ...rest
   } = typeof opts === "number" ? ({ width: opts } as Opts) : opts;
-  return (
+  return nonSVG ? <img src={d}/> :
     <svg
       aria-hidden="true"
       focusable="false"
@@ -47,7 +48,7 @@ export const createIcon = (
     >
       {typeof d === "string" ? <path fill="currentColor" d={d} /> : d}
     </svg>
-  );
+  ;
 };
 
 const tablerIconProps: Opts = {
@@ -357,23 +358,16 @@ export const TextIcon = createIcon(
 
 // modified tabler-icons: photo
 export const ImageIcon = createIcon(
-  <g strokeWidth="1.25">
-    <path d="M12.5 6.667h.01" />
-    <path d="M4.91 2.625h10.18a2.284 2.284 0 0 1 2.285 2.284v10.182a2.284 2.284 0 0 1-2.284 2.284H4.909a2.284 2.284 0 0 1-2.284-2.284V4.909a2.284 2.284 0 0 1 2.284-2.284Z" />
-    <path d="m3.333 12.5 3.334-3.333c.773-.745 1.726-.745 2.5 0l4.166 4.166" />
-    <path d="m11.667 11.667.833-.834c.774-.744 1.726-.744 2.5 0l1.667 1.667" />
-  </g>,
+  "/src/assets/Image/image-upload.svg",
   modifiedTablerIconProps,
+  true
 );
 
 // tabler-icons: eraser
 export const EraserIcon = createIcon(
-  <g strokeWidth="1.5">
-    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-    <path d="M19 20h-10.5l-4.21 -4.3a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9.2 9.3" />
-    <path d="M18 13.3l-6.3 -6.3" />
-  </g>,
+  "/src/assets/Image/eraser.svg",
   tablerIconProps,
+  true
 );
 
 export const ZoomInIcon = createIcon(
